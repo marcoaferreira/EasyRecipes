@@ -3,14 +3,20 @@ package com.devspace.myapplication
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import com.devspace.myapplication.detail.presentation.RecipeDetailViewModel
+import com.devspace.myapplication.list.presentation.RecipesViewModel
 import com.devspace.myapplication.ui.theme.EasyRecipesTheme
 
 class MainActivity : ComponentActivity() {
+
+    private val listViewModel by viewModels<RecipesViewModel> { RecipesViewModel.Factory }
+    private val detailViewModel by viewModels<RecipeDetailViewModel> { RecipeDetailViewModel.Factory }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -22,7 +28,8 @@ class MainActivity : ComponentActivity() {
                         .safeDrawingPadding(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    EasyRecipiesApp()
+                    EasyRecipiesApp(
+                        listViewModel = listViewModel)
                 }
             }
         }

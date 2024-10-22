@@ -1,4 +1,4 @@
-package com.devspace.myapplication
+package com.devspace.myapplication.list.presentation.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.devspace.myapplication.R
 import com.devspace.myapplication.ui.theme.EasyRecipesTheme
 
 @Composable
