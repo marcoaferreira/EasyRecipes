@@ -6,17 +6,23 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.devspace.myapplication.list.presentation.RecipesViewModel
+import com.devspace.myapplication.list.presentation.ui.MainScreen
+import com.devspace.myapplication.list.presentation.ui.OnboardingScreen
+import com.devspace.myapplication.list.presentation.ui.SearchRecipesScreen
 
 
 @Composable
-fun EasyRecipiesApp(){
+fun EasyRecipiesApp(
+    listViewModel: RecipesViewModel
+){
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "onboarding_screen" ){
         composable(route = "onboarding_screen"){
             OnboardingScreen(navController)
         }
         composable(route = "main_screen"){
-            MainScreen(navController)
+            MainScreen(navController, listViewModel)
         }
 
         composable(
