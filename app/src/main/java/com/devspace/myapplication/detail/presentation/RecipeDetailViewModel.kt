@@ -1,17 +1,13 @@
 package com.devspace.myapplication.detail.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
-import com.devspace.myapplication.common.data.RetrofitClient
-import com.devspace.myapplication.common.model.RecipeDto
+import com.devspace.myapplication.common.data.remote.RetrofitClient
+import com.devspace.myapplication.common.data.remote.model.RecipeDto
 import com.devspace.myapplication.detail.data.detailService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class RecipeDetailViewModel(
     private val detailService: detailService

@@ -1,8 +1,8 @@
 package com.devspace.myapplication
 
 import com.devspace.myapplication.common.data.SearchRecipesResponse
-import com.devspace.myapplication.common.model.RecipeDto
-import com.devspace.myapplication.common.model.RecipesResponse
+import com.devspace.myapplication.common.data.remote.model.RecipeDto
+import com.devspace.myapplication.common.data.remote.model.RecipesResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

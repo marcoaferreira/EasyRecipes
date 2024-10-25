@@ -1,6 +1,6 @@
 package com.devspace.myapplication.list.data.remote
 
-import com.devspace.myapplication.common.model.RecipesResponse
+import com.devspace.myapplication.common.data.remote.model.RecipesResponse
 import com.devspace.myapplication.common.data.SearchRecipesResponse
 import retrofit2.Call
 import retrofit2.Response
