@@ -2,10 +2,12 @@ package com.devspace.myapplication.list.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
-import com.devspace.myapplication.common.data.RetrofitClient
-import com.devspace.myapplication.common.model.RecipeDto
+import com.devspace.myapplication.RecipesApplication
+import com.devspace.myapplication.common.data.remote.RetrofitClient
+import com.devspace.myapplication.common.data.remote.model.RecipeDto
 import com.devspace.myapplication.list.data.RecipeListRepository
 import com.devspace.myapplication.list.data.remote.listService
 import kotlinx.coroutines.Dispatchers
@@ -29,8 +31,15 @@ class RecipesViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             val result = repository.getRecipes()
             if (result.isSuccess) {
-                val recipes = result.getOrNull()?.recipes?: emptyList()
-                _recipesList.value = recipes
+                val recipes = result.getOrNull()?: emptyList()
+                _recipesList.value = recipes.map {
+                    RecipeDto(
+                        id = it.id,
+                        title = it.title,
+                        image = it.image,
+                        summary = it.summary
+                    )
+                }
 
             } /*else {
                 val ex = result.exceptionOrNull()
@@ -47,8 +56,9 @@ class RecipesViewModel(
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
                 val listService = RetrofitClient.retrofitInstance.create(listService::class.java)
+                val application = checkNotNull(extras[APPLICATION_KEY])
                 return RecipesViewModel(
-                    repository = RecipeListRepository(listService)
+                    repository = (application as RecipesApplication).repository
                 ) as T
             }
         }

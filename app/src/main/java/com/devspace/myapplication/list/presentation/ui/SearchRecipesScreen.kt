@@ -35,7 +35,7 @@ import coil.compose.AsyncImage
 import com.devspace.myapplication.ApiService
 import com.devspace.myapplication.common.data.SearchRecipeDto
 import com.devspace.myapplication.common.data.SearchRecipesResponse
-import com.devspace.myapplication.common.data.RetrofitClient
+import com.devspace.myapplication.common.data.remote.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -29,8 +29,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.devspace.myapplication.ApiService
-import com.devspace.myapplication.common.model.RecipeDto
-import com.devspace.myapplication.common.data.RetrofitClient
+import com.devspace.myapplication.common.data.remote.model.RecipeDto
+import com.devspace.myapplication.common.data.remote.RetrofitClient
 import com.devspace.myapplication.designsystem.components.ERHtlmText
 import com.devspace.myapplication.designsystem.components.ERSearchBar
 import com.devspace.myapplication.list.presentation.RecipesViewModel

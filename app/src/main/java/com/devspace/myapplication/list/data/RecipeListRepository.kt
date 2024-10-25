@@ -1,26 +1,37 @@
 package com.devspace.myapplication.list.data
 
 
-import android.accounts.NetworkErrorException
-import com.devspace.myapplication.common.model.RecipesResponse
-import com.devspace.myapplication.list.data.remote.listService
+import com.devspace.myapplication.common.data.model.Recipe
+import com.devspace.myapplication.list.data.local.RecipesLocalDataSource
+import com.devspace.myapplication.list.data.remote.RecipeRemoteDataSource
+
 
 class RecipeListRepository(
-   private val listService: listService
+    private val local: RecipesLocalDataSource,
+    private val remote: RecipeRemoteDataSource
 ) {
 
-    suspend fun getRecipes(): Result<RecipesResponse?>{
-        return try {
-            val response = listService.getRandom()
-            if (response.isSuccessful) {
-                Result.success(response.body())
+    suspend fun getRecipes(): Result<List<Recipe>?> {
+        try {
+            val result = remote.getRecipes()
+            if(result.isSuccess){
+                val recipesRemote = result.getOrNull() ?: emptyList()
+                if(recipesRemote.isNotEmpty()){
+                    local.updateLocalItems(recipesRemote)
+                }
             } else {
-                    Result.failure(NetworkErrorException(response.message()))
+                val localData = local.getLocalRecipes()
+                if(localData.isEmpty()){
+                    return result
+                }
             }
+
+            // source of truth
+            return Result.success(local.getLocalRecipes())
 
         } catch (ex: Exception) {
             ex.printStackTrace()
-            Result.failure(ex)
+            return Result.failure(ex)
         }
     }
 }
