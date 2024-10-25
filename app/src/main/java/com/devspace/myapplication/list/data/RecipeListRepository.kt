@@ -12,7 +12,7 @@ class RecipeListRepository(
 ) {
 
     suspend fun getRecipes(): Result<List<Recipe>?> {
-        try {
+        return try {
             val result = remote.getRecipes()
             if(result.isSuccess){
                 val recipesRemote = result.getOrNull() ?: emptyList()
@@ -27,11 +27,11 @@ class RecipeListRepository(
             }
 
             // source of truth
-            return Result.success(local.getLocalRecipes())
+            Result.success(local.getLocalRecipes())
 
         } catch (ex: Exception) {
             ex.printStackTrace()
-            return Result.failure(ex)
+            Result.failure(ex)
         }
     }
 }
